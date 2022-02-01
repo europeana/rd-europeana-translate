@@ -1,0 +1,6 @@
+*.egg-info
+Pipfile*
+notebooks
+.ipynb*
+comments.txt
+timing.py
