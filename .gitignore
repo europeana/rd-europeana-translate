@@ -1,6 +1,8 @@
 *.egg-info
 Pipfile*
 comments.txt
+notebooks
+.ipynb*
 timing.py
 *.json
 *.csv
