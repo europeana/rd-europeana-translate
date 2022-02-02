@@ -1,0 +1,1 @@
+This folder contains a script to filter the metadata selected by the script multilingual_data_sourcing.ipynb
