@@ -1,6 +1,9 @@
 *.egg-info
 Pipfile*
-notebooks
-.ipynb*
 comments.txt
 timing.py
+*.json
+*.csv
+*.xls
+*.xlsx
+*.xlsm
