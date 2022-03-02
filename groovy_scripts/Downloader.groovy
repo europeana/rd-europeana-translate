@@ -1,3 +1,12 @@
+// Purpose of this script is to connect to Europeana FTP server
+// get a list of the available zip archives
+// queue them all for processing, ordered by size descending
+// download them into the cache area DOWNLOAD_DIR that has maximum size MAX_CACHE, as our discs couldnt hold many sets and the analysis results
+// process each one with the Eanascrape.groovy script
+// start at most three of those ... strictly not needed, as Eanascrape already is multithreaded and will keep the machine busy by itself
+// configure the output dir for Eanascrape tarballs in here
+// when analysis is done, the XML zip archive is deleted
+
 @Grapes([
         @Grab(group='commons-net', module='commons-net', version='2.0')
 ])
