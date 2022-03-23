@@ -1,5 +1,4 @@
-// Purpose of this script is to connect to Europeana FTP server
-// get a list of the available zip archives
+// Purpose of this script is to connect to Europeana FTP serverq// get a list of the available zip archives
 // queue them all for processing, ordered by size descending
 // download them into the cache area DOWNLOAD_DIR that has maximum size MAX_CACHE, as our discs couldnt hold many sets and the analysis results
 // process each one with the Eanascrape.groovy script
@@ -15,8 +14,8 @@ import org.apache.commons.net.ftp.*
 import java.util.function.*
 
 // setup here
-String DOWNLOAD_DIR = "/data/fast1/stabenau/staging"
-String PROCESSED_DIR = "/data/fast1/stabenau/jsonTarballs"
+String DOWNLOAD_DIR = "/home/pscalia/arne/downloading"
+String PROCESSED_DIR = "/home/pscalia/arne/json"
 long MAX_CACHE = 5_000_000_000l
 
 
@@ -55,7 +54,7 @@ class Process implements Runnable {
 
 
         this.dh = dh
-    }
+  }
 
     public void run() {
         def env = System.getenv() + ["JAVA_OPTS":"-Xmx16G"]

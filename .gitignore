@@ -10,4 +10,11 @@ timing.py
 *.xlsx
 *.xlsm
 *.bin
-lid.176.bin 
+lid.176.bin
+*.zip
+*.json.tgz
+*.jpeg
+*.jpg
+*.png
+
+
