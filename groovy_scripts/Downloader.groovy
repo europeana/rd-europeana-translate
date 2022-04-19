@@ -7,7 +7,7 @@
 // when analysis is done, the XML zip archive is deleted
 
 @Grapes([
-        @Grab(group='commons-net', module='commons-net', version='2.0')
+        @Grab(group='commons-net', module='commons-net', version='2.2')
 ])
 
 import org.apache.commons.net.ftp.*
@@ -61,6 +61,7 @@ class Process implements Runnable {
         def envList = env.collect{ k,v -> "$k=$v"}
         File cwd = new File( ".ignore").getAbsoluteFile().getParentFile()
         while( true ) {
+	println ("we are here") 
             Optional<File> nextFile = dh.get()
             if( !nextFile.isPresent()) break
             println( "Processing ${nextFile.get().name} Size:${nextFile.get().size()}")
@@ -109,8 +110,12 @@ class DownloadHelper implements Runnable {
     public void connect() {
         ftpClient.connect('download.europeana.eu')
         ftpClient.login("anonymous", "anonymous")
-        ftpClient.cwd( "dataset/XML")
+        ftpClient.cwd( "dataset/XML/")
+	ftpClient.enterLocalPassiveMode()
+	
+	println("${ftpClient.printWorkingDirectory()}")
     }
+
 
     public LinkedList<NameSize> getFileList() {
         def res = [] as LinkedList
