@@ -1,7 +1,7 @@
 
 import matplotlib.pyplot as plt
 
-def plot_tot_bar_results(data, title, hline=True, inset_yticks_spacing=30000,nr_low_languages=5):
+def plot_tot_bar_results(data, title, hline=True, inset=False, lst=[0,100,1000],nr_low_languages=5):
     """This function visualizes the results of  as bar plots
        Args:
        data: dataframe (typically index is languages and a column with nummber of segments)
@@ -16,15 +16,17 @@ def plot_tot_bar_results(data, title, hline=True, inset_yticks_spacing=30000,nr_
     axes.set_ylabel(f'# tagged metafields', fontsize=20 )
     if hline:
         axes.hlines(1e5, -1, 100,color='black',lw=3, label='100000 fields')
-    data.plot( kind='bar', mark_right=True,ax=axes)
-    axes.tick_params(axis='both', which='major', labelsize=25) # setting tick parameter of inset plot
+    data.plot( kind='bar', logy=True, mark_right=True,ax=axes)
+    axes.tick_params(axis='both', which='major', labelsize=20) # setting tick parameter of inset plot
     ################### inset plot
-    left, bottom, width, height = [0.6, 0.3, 0.2, 0.3] #position inset within main plot
-    ax2 = fig.add_axes([left, bottom, width, height])
-    data.iloc[-nr_low_languages:].plot( kind='bar', mark_right=True,legend=False, ax=ax2)
-    ax2.set_ylabel(f'# tagged metafields', fontsize=10 )
-    df_low_languages=data.iloc[-nr_low_languages:]
-    ax2.set_yticks([ i for i in range (0,int(df_low_languages.iloc[0]),inset_yticks_spacing)])
-    ax2.tick_params(axis='both', which='major', labelsize=15) # setting tick parameter of inset plot
-    axes.legend(loc='best',fontsize=20)
+    if inset:
+        left, bottom, width, height = [0.6, 0.3, 0.2, 0.3] #position inset within main plot
+        ax2 = fig.add_axes([left, bottom, width, height])
+        data.iloc[-nr_low_languages:].plot( kind='bar', mark_right=True,legend=False, ax=ax2)
+        ax2.set_ylabel(f'# tagged metafields', fontsize=10 )
+        df_low_languages=data.iloc[-nr_low_languages:]
+        ax2.set_yticks(lst)
+        # ax2.set_yticks([ i for i in range (0,int(df_low_languages.iloc[0]),inset_yticks_spacing)])
+        ax2.tick_params(axis='both', which='major', labelsize=15) # setting tick parameter of inset plot
+        axes.legend(loc='best',fontsize=20)
     return None
