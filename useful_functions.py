@@ -1,6 +1,7 @@
 
 import matplotlib.pyplot as plt
 
+
 def plot_tot_bar_results(data, title, hline=True, inset=False, lst=[0,100,1000],nr_low_languages=5):
     """This function visualizes the results of  as bar plots
        Args:
@@ -29,4 +30,54 @@ def plot_tot_bar_results(data, title, hline=True, inset=False, lst=[0,100,1000],
         # ax2.set_yticks([ i for i in range (0,int(df_low_languages.iloc[0]),inset_yticks_spacing)])
         ax2.tick_params(axis='both', which='major', labelsize=15) # setting tick parameter of inset plot
         axes.legend(loc='best',fontsize=20)
+    return None
+
+
+
+# The followign two functions are focused on plotting vertical or horizontal bars in semilog scale and have the possibility to print 
+# number on top of the bars. 
+#At the same time do not have the possibility to show insets.
+
+
+
+def plot_tot_barh_numbers(data, title, x_lim=1e8,segments_label=False):
+    """This function visualizes the results of  as bar horizontal bar plots
+       Args:
+       data: dataframe (typically index is languages and a column with nummber of segments)
+             NOTE: to work the numbers should be organizied in descending order (for the relevant column)
+       title: plot title
+       x_lim: right limit for the x axis
+       segment_label: if True the numbers of segments are printed on top of the bars
+     """
+    fig,axes= plt.subplots(1,1,figsize=(10,6))
+    axes.set_title(f"{title}",fontsize=20)
+    axes.set_ylabel(f'Amount of tagged fields', fontsize=18 )
+    data.plot(kind='barh',logx=True, mark_right=True,ax=axes)
+    if segments_label:
+        for p in axes.patches: # This part is to add the number of sesgments on top of the bars
+            axes.annotate(str(p.get_width()), ( p.get_width()*1.2,  p.get_y()+0.09),fontsize=13)
+    axes.tick_params(axis='both', which='major', labelsize=18) # setting tick parameter of inset plot
+    axes.set_xlim(1,x_lim )
+
+    return None
+
+def plot_tot_barv_numbers(data, title, y_lim=1e7, segments_label=False):
+    """This function visualizes the results of  as vertical bar plots
+       Args:
+       data: dataframe (typically index is languages and a column with number of segments)
+             NOTE: to work  the numbers should be organizied in descending order (for the relevant column)
+       title: plot title
+       x_lim: right limit for the x axis
+       segment_label: if True the numbers of segments are printed on top of the bars
+     """
+    fig,axes= plt.subplots(1,1,figsize=(10,5))
+    axes.set_title(f"{title}",fontsize=20)
+    axes.set_ylabel(f'Amount of tagged fields', fontsize=20 )
+    data.plot(kind='bar',logy=True, mark_right=True,ax=axes)
+    if segments_label:
+        for p in axes.patches: # This part is to add the number of sesgments on top of the bars
+            axes.annotate(str(p.get_height()), ( p.get_x(),  p.get_height()*1.8),fontsize=15,rotation=90)
+    axes.tick_params(axis='both', which='major', labelsize=20) # setting tick parameter of inset plot
+    axes.set_ylim(1,y_lim )
+
     return None
