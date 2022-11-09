@@ -40,7 +40,7 @@ def plot_tot_bar_results(data, title, hline=True, inset=False, lst=[0,100,1000],
 
 
 
-def plot_tot_barh_numbers(data, title, x_lim=1e8,segments_label=False):
+def plot_tot_barh_numbers(data, title,name_file='na', x_lim=0.4e8,slide_label=1,segments_label=False,save=False):
     """This function visualizes the results of  as bar horizontal bar plots
        Args:
        data: dataframe (typically index is languages and a column with nummber of segments)
@@ -49,15 +49,18 @@ def plot_tot_barh_numbers(data, title, x_lim=1e8,segments_label=False):
        x_lim: right limit for the x axis
        segment_label: if True the numbers of segments are printed on top of the bars
      """
-    fig,axes= plt.subplots(1,1,figsize=(10,6))
-    axes.set_title(f"{title}",fontsize=20)
-    axes.set_ylabel(f'Amount of tagged fields', fontsize=18 )
-    data.plot(kind='barh',logx=True, mark_right=True,ax=axes)
+    fig,axes= plt.subplots(1,1,dpi=150)
+    axes.set_title(f"{title}")#fontsize=20
+    axes.set_xlabel(f'Amount of tagged fields')
+    axes.set_ylabel(f'Languages')
+    data.plot(kind='barh',logx=True, mark_right=True,ax=axes, color='red') #'#5F9EA0'
     if segments_label:
         for p in axes.patches: # This part is to add the number of sesgments on top of the bars
-            axes.annotate(str(p.get_width()), ( p.get_width()*1.2,  p.get_y()+0.09),fontsize=13)
-    axes.tick_params(axis='both', which='major', labelsize=18) # setting tick parameter of inset plot
-    axes.set_xlim(1,x_lim )
+            axes.annotate('{:,}'.format(p.get_width()), ( 3.5e7*slide_label,  p.get_y()+0.09),fontsize=6)#fontsize=20
+    axes.tick_params(axis='both', which='major') # setting tick parameter of inset plot #labelsize=14
+    axes.set_xlim(0.5,x_lim )
+    if save:
+        fig.savefig(f'{name_file}.png',dpi=400)
 
     return None
 
