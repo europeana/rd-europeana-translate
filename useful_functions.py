@@ -87,7 +87,7 @@ def plot_tot_barv_numbers(data, title, y_lim=1e7, segments_label=False):
 
 
 
-def plot_multiple_hor_bar(df,columns,display_values, title, x_label, y_label, x=0.8e7, dpi=150, segments_label=False):
+def plot_multiple_hor_bar(df,columns,display_values, title, x_label, y_label, x=0.8e7, dpi=150, name_file='na' , segments_label=False, save=False):
     """ This function plots multiple horizontal bars
     df: dataframe where the data are stored
     columns: which columns to plot as bars
@@ -107,5 +107,7 @@ def plot_multiple_hor_bar(df,columns,display_values, title, x_label, y_label, x=
     if segments_label: # in case true the values are printed on plot
         for c, i in zip(df[f'{display_values}'].values, axes.patches):
             axes.text(x,i.get_y(),str(c.round(2))) 
+    if save:
+        fig.savefig(f'{name_file}.png')
     return None
 
