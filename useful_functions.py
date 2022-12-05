@@ -34,11 +34,8 @@ def plot_tot_bar_results(data, title, hline=True, inset=False, lst=[0,100,1000],
 
 
 
-# The followign two functions are focused on plotting vertical or horizontal bars in semilog scale and have the possibility to print 
-# number on top of the bars. 
-#At the same time do not have the possibility to show insets.
-
-
+# The followimg two functions are focused on plotting vertical or horizontal bars in semilog scale and have the possibility to print 
+# values on top of the plots.
 
 def plot_tot_barh_numbers(data, title,name_file='na', x_lim=0.4e8,slide_label=1,segments_label=False,save=False):
     """This function visualizes the results of  as bar horizontal bar plots
